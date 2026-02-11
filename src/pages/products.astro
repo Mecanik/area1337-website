@@ -1,0 +1,392 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { PRODUCTS, COMPANY_NAME } from "../consts";
+
+const product = PRODUCTS[0];
+
+const featureGroups = [
+  {
+    title: "Vault & Encryption",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="m7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+    features: [
+      "AES-256-CBC encryption — fully hand-coded, zero external dependencies",
+      "PBKDF2-SHA256 key derivation with 100,000 iterations",
+      "SHA-256 + SHA-512 dual hash indexing for all documents",
+      "HMAC-SHA256 integrity verification and tamper evidence",
+      "Create, open, close, and switch between encrypted vaults",
+      "Change vault passwords with verification",
+      "Export vault backups to any location",
+    ],
+  },
+  {
+    title: "Document Management",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    features: [
+      "Single and batch file ingestion with progress tracking",
+      "Recursive directory ingestion with filename filters",
+      "SHA-256 duplicate detection prevents re-import",
+      "Automatic MIME type detection",
+      "Rich metadata assignment: title, description, author, category, framework, status",
+      "Bulk update category, status, and bulk delete",
+      "Document export — decrypt and write to user-selected directory",
+    ],
+  },
+  {
+    title: "Search & Filtering",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+    features: [
+      "FTS5 full-text instant search across all document metadata",
+      "Combined filters: text + category + framework + status + tags + risk range + expiry",
+      "Search suggestions and autocomplete (prefix-based)",
+      "18 categories and 10 compliance frameworks",
+      "Debounced live search (300ms response time)",
+      "Risk score range filtering (min/max)",
+      "Expiry-only filter for expired or expiring-soon documents",
+    ],
+  },
+  {
+    title: "Audit Trail",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+    features: [
+      "Every action logged with UUID, timestamp, user, and severity",
+      "Event types: ingestion, modification, deletion, export, tag changes, risk changes, access",
+      "Severity levels: Info, Warning, Critical",
+      "Timeline queries by document, type, or date range",
+      "Event type breakdown statistics and activity-by-day",
+      "CSV and JSON export of audit data",
+      "Audit view widget with table, type filter, date range picker",
+    ],
+  },
+  {
+    title: "Risk & Compliance",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+    features: [
+      "Per-document composite risk score (0.0 – 1.0) with four weighted factors",
+      "Risk levels: low, medium, high, critical — colour-coded",
+      "Auto-generated improvement recommendations per document",
+      "Risk dashboard with gradient progress bar and sortable risk table",
+      "AI-powered 'Explain This Risk' — detailed factor-by-factor breakdown",
+      "Vault-wide risk summary with counts by risk level",
+      "Bulk assessment of all documents in a vault",
+    ],
+  },
+  {
+    title: "AI-Powered Analysis",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M12 8v13"/><path d="m8 22 4-4 4 4"/><path d="M4 12c0-1.1.9-2 2-2h1"/><path d="M17 10h1a2 2 0 0 1 0 4h-1"/><path d="M4 16h1a2 2 0 0 1 0 4H4"/><path d="M20 16h-1"/></svg>`,
+    features: [
+      "Dual-engine: local heuristic (offline) + remote LLM (OpenAI-compatible)",
+      "Document classification with confidence scores and reasoning",
+      "Evidence gap detection per compliance framework",
+      "Audit narrative generation: executive summary, timeline, compliance mapping",
+      "Risk prediction: current, 30-day, and 90-day with trend analysis",
+      "AI Dashboard with 5 tabs: Overview, Classification, Gap Detection, Narrative, Risk Prediction",
+      "Apply AI classifications directly to documents in bulk",
+    ],
+  },
+  {
+    title: "Export & Audit Wizard",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+    features: [
+      "HMAC-signed encrypted export packages (.v1337export)",
+      "13 pre-built export profiles: HMRC, IRS, ATO, CRA, Finanzamt, DGFiP, and more",
+      "4-step Prepare for Audit wizard with automated gap analysis",
+      "Chain-of-custody logs for legal exports",
+      "Human-readable cover letters (HTML) for each package",
+      "SHA-256 integrity checksums for verification",
+      "Export verification — verify package integrity with a separate password",
+    ],
+  },
+  {
+    title: "Retention & Policies",
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+    features: [
+      "Full CRUD for retention policies: name, category, period, action, auto-apply",
+      "Auto-apply on ingestion — matching policies set expiry dates automatically",
+      "7 jurisdiction templates with 60+ default policies",
+      "Bulk retroactive application to all existing documents",
+      "Violation detection and enforcement (archive/flag overdue documents)",
+      "Periodic monitoring with configurable interval (default: 60 minutes)",
+      "Four alert levels: Expired, Critical (7d), Warning (30d), Notice",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="V1337 Registry — Encrypted Compliance Evidence Registry"
+  description="Discover V1337 Registry: AES-256 encrypted vaults, immutable audit trails, AI-powered compliance analysis, and retention policy management for regulated industries."
+>
+
+  <!-- Hero -->
+  <section class="product-hero section--dark">
+    <div class="container">
+      <div class="product-hero__content animate-fade-in-up">
+        <span class="badge badge--dark">V1337 Registry</span>
+        <h1>{product.tagline}</h1>
+        <p class="product-hero__desc">{product.description}</p>
+        <div class="product-hero__platforms">
+          {product.platforms.map((p) => (
+            <span class="platform-tag">{p}</span>
+          ))}
+        </div>
+        <div class="product-hero__actions">
+          <a href="/pricing" class="btn btn--white btn--lg">View Pricing</a>
+          <a href="/contact" class="btn btn--secondary btn--lg product-hero__outline">Request Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Groups -->
+  {featureGroups.map((group, idx) => (
+    <section class:list={["section", { "section--alt": idx % 2 === 1 }]} id={group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+      <div class="container">
+        <div class="feature-section">
+          <div class="feature-section__header">
+            <div class="feature-section__icon" set:html={group.icon} />
+            <h2>{group.title}</h2>
+          </div>
+          <ul class="feature-section__list" role="list">
+            {group.features.map((feat) => (
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Cross-Platform -->
+  <section class="section section--alt" id="cross-platform">
+    <div class="container text-center">
+      <span class="badge">Cross-Platform</span>
+      <h2 style="margin-top: var(--space-md);">Runs natively on your OS</h2>
+      <p style="max-width: 600px; margin: var(--space-md) auto var(--space-2xl);">
+        Built with C++17 and Qt 6, V1337 Registry runs as a true native application on all major desktop platforms — no emulation, no Electron, no compromise.
+      </p>
+      <div class="platform-grid">
+        <div class="platform-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <strong>Windows</strong>
+          <span>64-bit (x64)</span>
+        </div>
+        <div class="platform-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          <strong>macOS</strong>
+          <span>Intel & Apple Silicon</span>
+        </div>
+        <div class="platform-card">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a7.32 7.32 0 0 0-.143-.076c-.735-.396-1.548-.46-2.285-.104-.328.159-.611.388-.838.672-.594.743-.766 1.794-.353 2.765.218.512.602.963 1.104 1.284.504.321 1.079.451 1.64.429.268-.011.533-.063.785-.153.254-.092.497-.222.721-.39.204-.152.395-.334.555-.541l.023-.028c.186.248.422.462.696.633.553.34 1.198.46 1.834.296a3.03 3.03 0 0 0 .627-.265c.389-.222.72-.53.975-.909.089-.133.17-.274.239-.421l.032.012c.235.635.685 1.168 1.272 1.481.584.312 1.282.369 1.932.187.25-.071.491-.177.714-.316.226-.142.434-.318.617-.522.153-.171.286-.363.396-.572l.046.007c.09.5.312.953.661 1.29.37.36.866.555 1.378.586.512.031 1.035-.122 1.464-.418.218-.15.413-.335.577-.551.149-.194.271-.41.362-.644.147.357.387.668.696.909.537.42 1.25.5 1.877.267.315-.118.601-.309.836-.558.239-.255.424-.565.543-.92.1-.293.148-.606.136-.92-.013-.323-.084-.647-.205-.96-.182-.465-.454-.885-.78-1.248-.322-.36-.712-.693-1.084-.864-.375-.173-.764-.231-1.154-.147l.017-.083a4.3 4.3 0 0 0-.027-.59c-.031-.389-.116-.77-.247-1.117a3.97 3.97 0 0 0-.611-1.043 4.38 4.38 0 0 0-.887-.814c.397-.347.75-.755 1.036-1.217.375-.604.613-1.307.695-2.061.086-.79.01-1.568-.176-2.254-.364-1.342-1.16-2.412-2.062-3.223-.901-.812-1.886-1.39-2.764-1.756A8.57 8.57 0 0 0 12.504 0z"/></svg>
+          <strong>Linux</strong>
+          <span>x64 distributions</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Callout -->
+  <section class="section--dark enterprise-cta" id="enterprise">
+    <div class="container">
+      <div class="enterprise-cta__grid">
+        <div>
+          <span class="badge badge--dark">Enterprise Edition</span>
+          <h2 style="margin-top: var(--space-md);">Need team collaboration?</h2>
+          <p>
+            The Enterprise Edition adds TLS-encrypted server mode, mutual TLS (mTLS), role-based access control, TOTP two-factor authentication, real-time collaboration, document locking, and server push notifications.
+          </p>
+          <a href="/contact" class="btn btn--white btn--lg" style="margin-top: var(--space-lg);">Contact Sales</a>
+        </div>
+        <div>
+          <ul class="enterprise-features" role="list">
+            {product.editions.enterprise.features.map((f) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section text-center">
+    <div class="container">
+      <h2>Start your compliance journey today</h2>
+      <p style="max-width: 500px; margin: var(--space-md) auto var(--space-xl);">
+        Whether you're a single-team operation or a multi-user enterprise, V1337 Registry has the tools you need.
+      </p>
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+        <a href="/pricing" class="btn btn--primary btn--lg">View Pricing</a>
+        <a href="/contact" class="btn btn--secondary btn--lg">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .product-hero {
+    padding: var(--space-5xl) 0 var(--space-4xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 50%, #0c1b3d 100%);
+  }
+  .product-hero__content {
+    max-width: 720px;
+  }
+  .product-hero__content h1 {
+    margin-top: var(--space-lg);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+  }
+  .product-hero__desc {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-lg);
+    line-height: 1.7;
+  }
+  .product-hero__actions {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    margin-top: var(--space-2xl);
+  }
+  .product-hero__platforms {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-lg);
+  }
+  .platform-tag {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .product-hero__outline {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: var(--color-white) !important;
+  }
+  .product-hero__outline:hover {
+    border-color: var(--color-white) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .feature-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .feature-section__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+  .feature-section__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .feature-section__list {
+    list-style: none;
+    display: grid;
+    gap: var(--space-md);
+  }
+  .feature-section__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+  .feature-section__list li svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* Platform Grid */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .platform-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-base);
+    color: var(--color-text-secondary);
+  }
+  .platform-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-accent);
+  }
+  .platform-card svg {
+    color: var(--color-accent);
+  }
+  .platform-card strong {
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+  .platform-card span {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .enterprise-cta {
+    padding: var(--space-5xl) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 100%);
+  }
+  .enterprise-cta__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+  .enterprise-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .enterprise-features li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+  .enterprise-features li svg {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .enterprise-cta__grid {
+      grid-template-columns: 1fr;
+    }
+    .platform-grid {
+      grid-template-columns: 1fr;
+      max-width: 300px;
+    }
+  }
+</style>

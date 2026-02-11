@@ -1,0 +1,384 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { PRODUCTS } from "../consts";
+
+const product = PRODUCTS[0];
+
+const faqs = [
+  {
+    q: "What is the difference between Business and Enterprise?",
+    a: "Business Edition provides the full standalone compliance registry — encrypted vaults, audit trails, risk scoring, AI analysis, and all export capabilities. Enterprise adds team/multi-user server mode with TLS-encrypted communication, mutual TLS (mTLS), role-based access control, TOTP 2FA, real-time collaboration, and dedicated support.",
+  },
+  {
+    q: "Is there a free trial?",
+    a: "Contact our sales team to discuss evaluation options and request a personalised demo for your organisation.",
+  },
+  {
+    q: "How is the software licensed?",
+    a: "V1337 Registry is licensed per organisation. Contact sales for detailed pricing based on your team size and deployment requirements.",
+  },
+  {
+    q: "Does it require internet access?",
+    a: "No. V1337 Registry is a local-first application with zero external runtime dependencies. The only optional internet feature is the remote AI engine (LLM-powered analysis), which can be disabled entirely.",
+  },
+  {
+    q: "What platforms are supported?",
+    a: "V1337 Registry is cross-platform, built with Qt 6 and C++17. It runs natively on Windows (64-bit), macOS (Intel & Apple Silicon), and Linux (x64 distributions).",
+  },
+  {
+    q: "Can I switch from Business to Enterprise later?",
+    a: "Yes. Your existing vaults and data are fully compatible. Upgrading adds server connectivity and team features without affecting your local data.",
+  },
+];
+---
+
+<BaseLayout
+  title="Pricing"
+  description="V1337 Registry pricing for Business and Enterprise editions. Enterprise-grade encrypted compliance software for regulated industries."
+>
+
+  <!-- Hero -->
+  <section class="pricing-hero section--dark">
+    <div class="container text-center">
+      <div class="animate-fade-in-up">
+        <span class="badge badge--dark">Pricing</span>
+        <h1 style="margin-top: var(--space-md);">Simple, transparent pricing</h1>
+        <p class="pricing-hero__subtitle">
+          Choose the edition that fits your organisation. Both include all core compliance features.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Cards -->
+  <section class="pricing-cards">
+    <div class="container">
+      <div class="pricing-grid">
+
+        <!-- Business -->
+        <div class="price-card">
+          <div class="price-card__header">
+            <h3>Business</h3>
+            <p class="price-card__subtitle">For individual teams and standalone compliance</p>
+          </div>
+          <div class="price-card__price">
+            <span class="price-card__amount">Contact Sales</span>
+            <span class="price-card__period">per organisation</span>
+          </div>
+          <ul class="price-card__features" role="list">
+            {product.editions.business.features.map((f) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a href="/contact" class="btn btn--secondary" style="width: 100%;">Contact Sales</a>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="price-card price-card--featured">
+          <div class="price-card__badge">Most Popular</div>
+          <div class="price-card__header">
+            <h3>Enterprise</h3>
+            <p class="price-card__subtitle">For teams needing collaboration and central management</p>
+          </div>
+          <div class="price-card__price">
+            <span class="price-card__amount">Contact Sales</span>
+            <span class="price-card__period">per organisation</span>
+          </div>
+          <ul class="price-card__features" role="list">
+            {product.editions.enterprise.features.map((f) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+          <a href="/contact" class="btn btn--primary" style="width: 100%;">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="text-center" style="margin-bottom: var(--space-3xl);">Feature comparison</h2>
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="text-center">Business</th>
+              <th class="text-center">Enterprise</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>AES-256-CBC encrypted vaults</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>FTS5 full-text search</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Immutable audit trail</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Compliance risk scoring</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>AI-powered analysis</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>7 jurisdiction templates</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Prepare for Audit wizard</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Evidence relationship graph</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Encrypted export packages</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Email evidence capture</td><td class="text-center">&#10003;</td><td class="text-center">&#10003;</td></tr>
+            <tr class="comparison-table__divider"><td colspan="3">Enterprise Features</td></tr>
+            <tr><td>Multi-user server mode</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>TLS-encrypted communication</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Mutual TLS (mTLS)</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Role-based access control</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>TOTP two-factor authentication</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Real-time collaboration</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Document locking & sync</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Server push notifications</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+            <tr><td>Dedicated support & SLA</td><td class="text-center">—</td><td class="text-center">&#10003;</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container container--narrow">
+      <h2 class="text-center" style="margin-bottom: var(--space-3xl);">Frequently asked questions</h2>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-item__question">{faq.q}</summary>
+            <p class="faq-item__answer">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section--dark cta-bottom">
+    <div class="container text-center">
+      <h2>Need help choosing?</h2>
+      <p style="max-width: 480px; margin: var(--space-md) auto var(--space-xl);">
+        Our team can help you evaluate the right edition for your compliance requirements.
+      </p>
+      <a href="/contact" class="btn btn--white btn--lg">Talk to Sales</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .pricing-hero {
+    padding: var(--space-4xl) 0 var(--space-2xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 100%);
+  }
+  .pricing-hero__subtitle {
+    max-width: 520px;
+    margin: var(--space-md) auto 0;
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+  }
+
+  .pricing-cards {
+    margin-top: -3rem;
+    padding-bottom: var(--space-4xl);
+    position: relative;
+    z-index: 1;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .price-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    position: relative;
+  }
+
+  .price-card--featured {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-xl);
+  }
+
+  .price-card__badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 1rem;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .price-card__header h3 {
+    font-size: 1.5rem;
+  }
+
+  .price-card__subtitle {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+    margin-bottom: 0;
+  }
+
+  .price-card__price {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .price-card__amount {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-text);
+  }
+
+  .price-card__period {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .price-card__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex: 1;
+  }
+
+  .price-card__features li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .price-card__features li svg {
+    flex-shrink: 0;
+  }
+
+  /* Comparison Table */
+  .comparison-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.875rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .comparison-table th {
+    font-weight: 600;
+    color: var(--color-text);
+    background: var(--color-white);
+    position: sticky;
+    top: 0;
+  }
+
+  .comparison-table td {
+    color: var(--color-text-secondary);
+  }
+
+  .comparison-table__divider td {
+    font-weight: 700;
+    color: var(--color-text);
+    background: var(--color-border-light);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-top: 1.25rem;
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: all var(--transition-fast);
+  }
+
+  .faq-item[open] {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-accent);
+  }
+
+  .faq-item__question {
+    cursor: pointer;
+    padding: var(--space-lg) var(--space-xl);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__question::after {
+    content: "+";
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
+  .faq-item[open] .faq-item__question::after {
+    content: "−";
+    color: var(--color-accent);
+  }
+
+  .faq-item__answer {
+    padding: 0 var(--space-xl) var(--space-lg);
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .cta-bottom {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 100%);
+  }
+
+  @media (max-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

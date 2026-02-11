@@ -1,62 +1,309 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { COMPANY_NAME, COMPANY_LEGAL_NAME } from "../consts";
+
+const values = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: "Security First",
+    description: "Every line of our cryptographic code is hand-written and auditable. We never outsource the security of your data to third-party libraries.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    title: "Local-First Philosophy",
+    description: "Your data stays on your infrastructure. Our software runs without cloud dependencies — fully air-gappable for the most sensitive environments.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: "Built for Professionals",
+    description: "Designed alongside compliance officers, accountants, and legal teams in regulated industries. Every feature solves a real workflow problem.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    title: "Zero Dependencies",
+    description: "Our C++17 codebase has no external runtime dependencies. Cryptography, email parsing, and AI heuristics are all native — reducing supply chain risk to zero.",
+  },
+];
+
+const timeline = [
+  { year: "2005+", event: "Founder begins professional career in software engineering — over two decades of commercial experience across web development, systems programming, security, and infrastructure." },
+  { year: "2020", event: "Mecanik Dev Ltd established — the company behind Area 1337 and the 1337 product line." },
+  { year: "2024", event: "Development begins on V1337 Registry — an encrypted compliance evidence registry built from scratch in C++17 with hand-coded cryptography." },
+  { year: "2025", event: "V1337 Registry reaches 150+ capabilities across 22 feature categories. Enterprise Edition development begins with TLS-encrypted multi-user server architecture." },
+  { year: "2026", event: "Global launch of V1337 Registry Business and Enterprise editions for Windows, macOS, and Linux." },
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
+<BaseLayout
+  title="About"
+  description={`Learn about ${COMPANY_NAME} — elite software by ${COMPANY_LEGAL_NAME}. Built by a developer with two decades of commercial experience.`}
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+  <!-- Hero -->
+  <section class="about-hero section--dark">
+    <div class="container">
+      <div class="about-hero__content animate-fade-in-up">
+        <span class="badge badge--dark">About Us</span>
+        <h1 style="margin-top: var(--space-md);">Two decades of expertise,<br />distilled into elite software</h1>
+        <p class="about-hero__desc">
+          {COMPANY_NAME} is the product line of <strong>{COMPANY_LEGAL_NAME}</strong> — a software company founded by a developer with over 20 years of commercial experience in systems programming, web development, security, and infrastructure. We build tools that meet the highest standard: the 1337 standard.
+        </p>
+      </div>
+    </div>
+  </section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+  <!-- Founder -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="founder-section">
+        <div class="founder-info">
+          <span class="badge">The Founder</span>
+          <h2 style="margin-top: var(--space-md);">Norbert E. Boros</h2>
+          <p class="founder-alias">Also known as "Mecanik" &middot; Founder of {COMPANY_LEGAL_NAME}</p>
+          <p class="founder-bio">
+            A solutions-driven professional with extensive experience in designing and developing complex software systems, websites, and infrastructures. With expertise grounded in multiple programming languages and state-of-the-art tools, Norbert has managed end-to-end development of complex projects — from system architecture and cryptographic implementation to full-stack web platforms and security tooling.
+          </p>
+          <p class="founder-bio">
+            Over the years, he has had the privilege of working with an impressive list of clients including Rolls Royce, VUE, Nationwide, Specsavers, LinkedIn, CrowdStrike, BUPA, VMware, Alibaba, and many more — bringing deep industry knowledge to every {COMPANY_NAME} product.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+  <!-- Mission -->
+  <section class="section section--alt">
+    <div class="container container--narrow text-center">
+      <span class="badge">Our Mission</span>
+      <h2 style="margin-top: var(--space-md);">Software without compromise</h2>
+      <p style="font-size: 1.125rem; line-height: 1.8; margin-top: var(--space-lg);">
+        We believe professionals deserve tools that are engineered to the highest standard — software that runs on your infrastructure, encrypts everything at rest, provides complete audit traceability, and carries zero external runtime dependencies. That's the 1337 promise.
+      </p>
+    </div>
+  </section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+  <!-- Values -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <span class="badge">Core Values</span>
+        <h2 style="margin-top: var(--space-md);">What drives us</h2>
+      </div>
+      <div class="grid grid--2">
+        {values.map((v) => (
+          <div class="card">
+            <div class="value-icon" set:html={v.icon} />
+            <h3 style="font-size: 1.125rem; margin-top: var(--space-md);">{v.title}</h3>
+            <p style="font-size: 0.9375rem; margin-top: var(--space-sm); margin-bottom: 0;">
+              {v.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section section--alt">
+    <div class="container container--narrow">
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <span class="badge">Our Journey</span>
+        <h2 style="margin-top: var(--space-md);">Company timeline</h2>
+      </div>
+      <div class="timeline">
+        {timeline.map((item, i) => (
+          <div class="timeline__item">
+            <div class="timeline__marker">
+              <span class="timeline__year">{item.year}</span>
+            </div>
+            <div class="timeline__content">
+              <p style="margin: 0;">{item.event}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="section">
+    <div class="container container--narrow text-center">
+      <span class="badge">Technology</span>
+      <h2 style="margin-top: var(--space-md);">Built with precision</h2>
+      <p style="margin-top: var(--space-md); margin-bottom: var(--space-2xl);">
+        Our products are engineered from the ground up for performance, security, and reliability.
+      </p>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <strong>C++17</strong>
+          <span>Core Language</span>
+        </div>
+        <div class="tech-item">
+          <strong>Qt 6.10</strong>
+          <span>UI Framework</span>
+        </div>
+        <div class="tech-item">
+          <strong>SQLite + FTS5</strong>
+          <span>Database</span>
+        </div>
+        <div class="tech-item">
+          <strong>AES-256-CBC</strong>
+          <span>Encryption</span>
+        </div>
+        <div class="tech-item">
+          <strong>PBKDF2-SHA256</strong>
+          <span>Key Derivation</span>
+        </div>
+        <div class="tech-item">
+          <strong>TLS 1.2+</strong>
+          <span>Transport Security</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section--dark cta-bottom">
+    <div class="container text-center">
+      <h2>Want to learn more?</h2>
+      <p style="max-width: 480px; margin: var(--space-md) auto var(--space-xl);">
+        Get in touch to discuss how our products can support your requirements.
+      </p>
+      <div style="display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+        <a href="/contact" class="btn btn--white btn--lg">Contact Us</a>
+        <a href="/products" class="btn btn--secondary btn--lg cta-outline">View Products</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .about-hero {
+    padding: var(--space-5xl) 0 var(--space-4xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 50%, #0c1b3d 100%);
+  }
+  .about-hero__content {
+    max-width: 720px;
+  }
+  .about-hero__desc {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-lg);
+    line-height: 1.7;
+  }
+  .about-hero__desc strong {
+    color: var(--color-white);
+  }
+
+  /* Founder */
+  .founder-section {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .founder-alias {
+    font-size: 1rem;
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-top: var(--space-xs);
+  }
+  .founder-bio {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-top: var(--space-md);
+  }
+
+  .value-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  /* Timeline */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+  }
+  .timeline__item {
+    position: relative;
+    padding-bottom: var(--space-xl);
+    padding-left: var(--space-xl);
+  }
+  .timeline__marker {
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+  }
+  .timeline__year {
+    display: inline-block;
+    background: var(--color-accent);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-full);
+  }
+  .timeline__content p {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* Tech Grid */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+  .tech-item {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .tech-item strong {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+  .tech-item span {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .cta-bottom {
+    padding: var(--space-4xl) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 100%);
+  }
+  .cta-outline {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: var(--color-white) !important;
+  }
+  .cta-outline:hover {
+    border-color: var(--color-white) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  @media (max-width: 640px) {
+    .tech-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

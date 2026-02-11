@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://area1337.com/sitemap-index.xml
+
+# Disallow crawling of non-content paths
+Disallow: /404

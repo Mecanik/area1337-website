@@ -1,50 +1,378 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, PRODUCTS, COMPANY_NAME } from "../consts";
+
+const pillars = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="m7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+    title: "Security-First Engineering",
+    description: "Hand-coded cryptography, zero external dependencies, and auditable codebases. Every product is built from the ground up for trust.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    title: "Cross-Platform Native",
+    description: "Built with C++17 and Qt 6, our products run natively on Windows, macOS, and Linux — no emulation, no compromise.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    title: "Local-First Architecture",
+    description: "Your data stays on your infrastructure. No cloud lock-in, no telemetry, no data leaving your network — fully air-gappable.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M12 8v13"/><path d="m8 22 4-4 4 4"/><path d="M4 12c0-1.1.9-2 2-2h1"/><path d="M17 10h1a2 2 0 0 1 0 4h-1"/><path d="M4 16h1a2 2 0 0 1 0 4H4"/><path d="M20 16h-1"/></svg>`,
+    title: "AI-Augmented",
+    description: "Dual-engine AI — local heuristic analysis for offline use, plus optional remote LLM integration for deeper insights.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    title: "Zero Dependencies",
+    description: "No third-party runtime libraries. Cryptography, protocol handling, and AI heuristics are all native — eliminating supply chain risk.",
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: "Enterprise-Ready",
+    description: "From single-user standalone to multi-user TLS-encrypted server deployments with RBAC and 2FA — scale at your own pace.",
+  },
+];
+
+const stats = [
+  { value: "20+", label: "Years of experience" },
+  { value: "C++17", label: "Core language" },
+  { value: "3", label: "Platforms supported" },
+  { value: "0", label: "External dependencies" },
+];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero section--dark">
+    <div class="container text-center">
+      <div class="hero__content animate-fade-in-up">
+        <span class="badge badge--dark">Elite Software</span>
+        <h1 class="hero__title">
+          Software Engineered<br />to Be <span class="hero__highlight">1337.</span>
+        </h1>
+        <p class="hero__subtitle">
+          We build enterprise-grade tools for professionals who refuse to compromise. Security, compliance, encryption — crafted with two decades of engineering expertise and zero external dependencies.
+        </p>
+        <div class="hero__actions">
+          <a href="/products" class="btn btn--white btn--lg">Explore Products</a>
+          <a href="/contact" class="btn btn--secondary btn--lg hero__btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Stats Bar ===== -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-bar__grid">
+        {stats.map((stat) => (
+          <div class="stats-bar__item">
+            <span class="stats-bar__value">{stat.value}</span>
+            <span class="stats-bar__label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Why 1337 ===== -->
+  <section class="section" id="why-1337">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <span class="badge">Why 1337</span>
+        <h2 style="margin-top: var(--space-md);">Engineering principles, not shortcuts</h2>
+        <p style="max-width: 640px; margin: var(--space-md) auto 0;">
+          Every 1337 product is built on the same uncompromising foundation — hand-coded cryptography, native performance, and complete data sovereignty.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {pillars.map((pillar, i) => (
+          <div class={`card animate-fade-in-up animate-delay-${(i % 4) + 1}`}>
+            <div class="pillar-icon" set:html={pillar.icon} />
+            <h3 style="font-size: 1.125rem; margin-top: var(--space-md);">{pillar.title}</h3>
+            <p style="font-size: 0.9375rem; margin-top: var(--space-sm); margin-bottom: 0;">
+              {pillar.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Products ===== -->
+  <section class="section section--alt" id="products">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: var(--space-3xl);">
+        <span class="badge">Our Products</span>
+        <h2 style="margin-top: var(--space-md);">The 1337 product line</h2>
+        <p style="max-width: 600px; margin: var(--space-md) auto 0;">
+          Professional-grade tools built for professionals. Each product carries the 1337 standard of excellence.
+        </p>
+      </div>
+
+      {PRODUCTS.map((product) => (
+        <div class="product-showcase">
+          <div class="product-showcase__info">
+            <div class="product-showcase__badges">
+              <span class="badge badge--dark">{product.status === "available" ? "Available 2026" : "Coming Soon"}</span>
+              <span class="platform-badges">
+                {product.platforms.map((p) => (
+                  <span class="platform-badge">{p}</span>
+                ))}
+              </span>
+            </div>
+            <h3 class="product-showcase__name">{product.name}</h3>
+            <p class="product-showcase__tagline">{product.tagline}</p>
+            <p class="product-showcase__desc">{product.description}</p>
+            <div class="product-showcase__editions">
+              {Object.values(product.editions).map((ed) => (
+                <div class="edition-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {ed.name} Edition
+                </div>
+              ))}
+            </div>
+            <div class="product-showcase__actions">
+              <a href={product.href} class="btn btn--primary">Learn More</a>
+              <a href="/pricing" class="btn btn--secondary">View Pricing</a>
+            </div>
+          </div>
+          <div class="product-showcase__highlights">
+            <div class="highlight-card">
+              <span class="highlight-value">150+</span>
+              <span class="highlight-label">Capabilities</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-value">22</span>
+              <span class="highlight-label">Feature categories</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-value">7</span>
+              <span class="highlight-label">Jurisdictions</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-value">AES-256</span>
+              <span class="highlight-label">Encryption</span>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div class="more-products text-center">
+        <p class="text-muted">More 1337 products are in development. Stay tuned.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="section--dark cta-section">
+    <div class="container text-center">
+      <h2>Ready to experience 1337?</h2>
+      <p style="max-width: 500px; margin: var(--space-md) auto var(--space-xl);">
+        Get in touch with our team to discuss how our products can transform your workflow.
+      </p>
+      <div class="hero__actions" style="justify-content: center;">
+        <a href="/contact" class="btn btn--white btn--lg">Contact Us</a>
+        <a href="/products" class="btn btn--secondary btn--lg hero__btn-outline">View Products</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-5xl) 0 var(--space-4xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 50%, #0c1b3d 100%);
+    overflow: hidden;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.1;
+    margin-top: var(--space-lg);
+  }
+
+  .hero__highlight {
+    background: linear-gradient(135deg, var(--color-accent), #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__subtitle {
+    font-size: 1.125rem;
+    max-width: 640px;
+    margin: var(--space-lg) auto 0;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: center;
+    margin-top: var(--space-2xl);
+  }
+
+  .hero__btn-outline {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: var(--color-white) !important;
+  }
+  .hero__btn-outline:hover {
+    border-color: var(--color-white) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .stats-bar {
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-2xl) 0;
+  }
+  .stats-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xl);
+    text-align: center;
+  }
+  .stats-bar__value {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    letter-spacing: -0.03em;
+  }
+  .stats-bar__label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+  }
+
+  .pillar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--color-accent-light);
+    color: var(--color-accent);
+  }
+
+  /* Product Showcase */
+  .product-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-3xl);
+    margin-bottom: var(--space-xl);
+  }
+  .product-showcase__badges {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .platform-badges {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  .platform-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-full);
+    background: var(--color-border-light);
+    color: var(--color-text-secondary);
+  }
+  .product-showcase__name {
+    font-size: 1.75rem;
+    margin-top: var(--space-md);
+  }
+  .product-showcase__tagline {
+    font-size: 1.0625rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-top: var(--space-xs);
+  }
+  .product-showcase__desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-top: var(--space-md);
+  }
+  .product-showcase__editions {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  .edition-chip {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .product-showcase__actions {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+  }
+  .product-showcase__highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+  .highlight-card {
+    background: var(--color-border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .highlight-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+  }
+  .highlight-label {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .more-products {
+    margin-top: var(--space-xl);
+  }
+  .more-products p {
+    font-size: 0.9375rem;
+    font-style: italic;
+  }
+
+  .cta-section {
+    padding: var(--space-5xl) 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1a2744 100%);
+  }
+
+  @media (max-width: 768px) {
+    .stats-bar__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .product-showcase {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

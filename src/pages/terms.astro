@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { COMPANY_NAME, COMPANY_LEGAL_NAME, COMPANY_EMAIL, SITE_URL } from "../consts";
+
+const lastUpdated = "February 2026";
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description={`Terms of Service for ${COMPANY_NAME}. Read the terms that govern the use of our website and products.`}
+>
+  <section class="legal-page section">
+    <div class="container container--narrow">
+      <h1>Terms of Service</h1>
+      <p class="legal-meta">Last updated: {lastUpdated}</p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>
+        By accessing and using the {COMPANY_NAME} website at <a href={SITE_URL}>{SITE_URL}</a> and our software products, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+      </p>
+
+      <h2>2. Products and Licensing</h2>
+      <p>
+        V1337 Registry software is licensed per organisation under a separate software licence agreement. The specific terms of your software licence will be provided upon purchase. Use of the software is subject to those licence terms.
+      </p>
+
+      <h2>3. Intellectual Property</h2>
+      <p>
+        All content on this website, including text, graphics, logos, and software, is the property of {COMPANY_LEGAL_NAME}, trading as {COMPANY_NAME}, and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our written permission.
+      </p>
+
+      <h2>4. Website Use</h2>
+      <p>You agree to use this website lawfully and not to:</p>
+      <ul>
+        <li>Attempt to gain unauthorised access to any part of the website</li>
+        <li>Transmit any malicious code or interfere with website functionality</li>
+        <li>Use the website for any unlawful or fraudulent purpose</li>
+        <li>Reproduce or scrape website content without permission</li>
+      </ul>
+
+      <h2>5. Limitation of Liability</h2>
+      <p>
+        To the maximum extent permitted by law, {COMPANY_NAME} shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of our website or products.
+      </p>
+
+      <h2>6. Warranties</h2>
+      <p>
+        The website is provided "as is" without warranties of any kind. Software product warranties are defined in the applicable software licence agreement.
+      </p>
+
+      <h2>7. Governing Law</h2>
+      <p>
+        These terms are governed by and construed in accordance with the laws of England and Wales.
+      </p>
+
+      <h2>8. Changes to Terms</h2>
+      <p>
+        We reserve the right to modify these terms at any time. Changes will be posted on this page with an updated revision date.
+      </p>
+
+      <h2>9. Contact</h2>
+      <p>
+        For questions about these terms, contact us at <a href={`mailto:${COMPANY_EMAIL}`}>{COMPANY_EMAIL}</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+  .legal-meta {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2xl);
+  }
+  .legal-page h2 {
+    font-size: 1.25rem;
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-sm);
+  }
+  .legal-page p,
+  .legal-page li {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+  .legal-page ul {
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+  .legal-page li {
+    margin-bottom: var(--space-sm);
+  }
+</style>
