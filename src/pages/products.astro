@@ -1,15 +1,36 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { PRODUCTS, COMPANY_NAME } from "../consts";
+import { PRODUCTS, COMPANY_NAME, SITE_URL, COMPANY_LEGAL_NAME } from "../consts";
 
 const product = PRODUCTS[0];
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  description: product.description,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Windows, macOS, Linux",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "GBP",
+    availability: "https://schema.org/InStock",
+    url: `${SITE_URL}/pricing`,
+  },
+  author: {
+    "@type": "Organization",
+    name: COMPANY_LEGAL_NAME,
+    url: SITE_URL,
+  },
+};
 
 const featureGroups = [
   {
     title: "Vault & Encryption",
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="m7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
     features: [
-      "AES-256-CBC encryption — fully hand-coded, zero external dependencies",
+      "AES-256-CBC encryption, fully hand-coded with zero external dependencies",
       "PBKDF2-SHA256 key derivation with 100,000 iterations",
       "SHA-256 + SHA-512 dual hash indexing for all documents",
       "HMAC-SHA256 integrity verification and tamper evidence",
@@ -28,7 +49,7 @@ const featureGroups = [
       "Automatic MIME type detection",
       "Rich metadata assignment: title, description, author, category, framework, status",
       "Bulk update category, status, and bulk delete",
-      "Document export — decrypt and write to user-selected directory",
+      "Document export: decrypt and write to user-selected directory",
     ],
   },
   {
@@ -62,10 +83,10 @@ const featureGroups = [
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
     features: [
       "Per-document composite risk score (0.0 – 1.0) with four weighted factors",
-      "Risk levels: low, medium, high, critical — colour-coded",
+      "Risk levels: low, medium, high, critical (colour-coded)",
       "Auto-generated improvement recommendations per document",
       "Risk dashboard with gradient progress bar and sortable risk table",
-      "AI-powered 'Explain This Risk' — detailed factor-by-factor breakdown",
+      "AI-powered 'Explain This Risk' with detailed factor-by-factor breakdown",
       "Vault-wide risk summary with counts by risk level",
       "Bulk assessment of all documents in a vault",
     ],
@@ -93,7 +114,7 @@ const featureGroups = [
       "Chain-of-custody logs for legal exports",
       "Human-readable cover letters (HTML) for each package",
       "SHA-256 integrity checksums for verification",
-      "Export verification — verify package integrity with a separate password",
+      "Export verification: verify package integrity with a separate password",
     ],
   },
   {
@@ -101,7 +122,7 @@ const featureGroups = [
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
     features: [
       "Full CRUD for retention policies: name, category, period, action, auto-apply",
-      "Auto-apply on ingestion — matching policies set expiry dates automatically",
+      "Auto-apply on ingestion: matching policies set expiry dates automatically",
       "7 jurisdiction templates with 60+ default policies",
       "Bulk retroactive application to all existing documents",
       "Violation detection and enforcement (archive/flag overdue documents)",
@@ -113,11 +134,11 @@ const featureGroups = [
 ---
 
 <BaseLayout
-  title="V1337 Registry — Encrypted Compliance Evidence Registry"
+  title="V1337 Registry - Encrypted Compliance Evidence Registry"
   description="Discover V1337 Registry: AES-256 encrypted vaults, immutable audit trails, AI-powered compliance analysis, and retention policy management for regulated industries."
+  schema={productSchema}
 >
 
-  <!-- Hero -->
   <section class="product-hero section--dark">
     <div class="container">
       <div class="product-hero__content animate-fade-in-up">
@@ -137,7 +158,6 @@ const featureGroups = [
     </div>
   </section>
 
-  <!-- Feature Groups -->
   {featureGroups.map((group, idx) => (
     <section class:list={["section", { "section--alt": idx % 2 === 1 }]} id={group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
       <div class="container">
@@ -159,13 +179,12 @@ const featureGroups = [
     </section>
   ))}
 
-  <!-- Cross-Platform -->
   <section class="section section--alt" id="cross-platform">
     <div class="container text-center">
       <span class="badge">Cross-Platform</span>
       <h2 style="margin-top: var(--space-md);">Runs natively on your OS</h2>
       <p style="max-width: 600px; margin: var(--space-md) auto var(--space-2xl);">
-        Built with C++17 and Qt 6, V1337 Registry runs as a true native application on all major desktop platforms — no emulation, no Electron, no compromise.
+        Built with C++17 and Qt 6, V1337 Registry runs as a true native application on all major desktop platforms. No emulation, no Electron, no compromise.
       </p>
       <div class="platform-grid">
         <div class="platform-card">
@@ -187,7 +206,6 @@ const featureGroups = [
     </div>
   </section>
 
-  <!-- Enterprise Callout -->
   <section class="section--dark enterprise-cta" id="enterprise">
     <div class="container">
       <div class="enterprise-cta__grid">
@@ -213,7 +231,6 @@ const featureGroups = [
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="section text-center">
     <div class="container">
       <h2>Start your compliance journey today</h2>

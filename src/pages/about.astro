@@ -11,7 +11,7 @@ const values = [
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     title: "Local-First Philosophy",
-    description: "Your data stays on your infrastructure. Our software runs without cloud dependencies — fully air-gappable for the most sensitive environments.",
+    description: "Your data stays on your infrastructure. Our software runs without cloud dependencies. Fully air-gappable for the most sensitive environments.",
   },
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
@@ -21,14 +21,14 @@ const values = [
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
     title: "Zero Dependencies",
-    description: "Our C++17 codebase has no external runtime dependencies. Cryptography, email parsing, and AI heuristics are all native — reducing supply chain risk to zero.",
+    description: "Our C++17 codebase has no external runtime dependencies. Cryptography, email parsing, and AI heuristics are all native, reducing supply chain risk to zero.",
   },
 ];
 
 const timeline = [
-  { year: "2005+", event: "Founder begins professional career in software engineering — over two decades of commercial experience across web development, systems programming, security, and infrastructure." },
-  { year: "2020", event: "Mecanik Dev Ltd established — the company behind Area 1337 and the 1337 product line." },
-  { year: "2024", event: "Development begins on V1337 Registry — an encrypted compliance evidence registry built from scratch in C++17 with hand-coded cryptography." },
+  { year: "2005+", event: "Founder begins professional career in software engineering, accumulating over two decades of commercial experience across web development, systems programming, security, and infrastructure." },
+  { year: "2020", event: "Mecanik Dev Ltd established, the company behind Area 1337 and the 1337 product line." },
+  { year: "2024", event: "Development begins on V1337 Registry, an encrypted compliance evidence registry built from scratch in C++17 with hand-coded cryptography." },
   { year: "2025", event: "V1337 Registry reaches 150+ capabilities across 22 feature categories. Enterprise Edition development begins with TLS-encrypted multi-user server architecture." },
   { year: "2026", event: "Global launch of V1337 Registry Business and Enterprise editions for Windows, macOS, and Linux." },
 ];
@@ -36,23 +36,21 @@ const timeline = [
 
 <BaseLayout
   title="About"
-  description={`Learn about ${COMPANY_NAME} — elite software by ${COMPANY_LEGAL_NAME}. Built by a developer with two decades of commercial experience.`}
+  description={`Learn about ${COMPANY_NAME}, elite software by ${COMPANY_LEGAL_NAME}. Built by a developer with two decades of commercial experience.`}
 >
 
-  <!-- Hero -->
   <section class="about-hero section--dark">
     <div class="container">
       <div class="about-hero__content animate-fade-in-up">
         <span class="badge badge--dark">About Us</span>
         <h1 style="margin-top: var(--space-md);">Two decades of expertise,<br />distilled into elite software</h1>
         <p class="about-hero__desc">
-          {COMPANY_NAME} is the product line of <strong>{COMPANY_LEGAL_NAME}</strong> — a software company founded by a developer with over 20 years of commercial experience in systems programming, web development, security, and infrastructure. We build tools that meet the highest standard: the 1337 standard.
+          {COMPANY_NAME} is the product line of <strong>{COMPANY_LEGAL_NAME}</strong>, a software company founded by a developer with over 20 years of commercial experience in systems programming, web development, security, and infrastructure. We build tools that meet the highest standard: the 1337 standard.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Founder -->
   <section class="section">
     <div class="container container--narrow">
       <div class="founder-section">
@@ -61,28 +59,26 @@ const timeline = [
           <h2 style="margin-top: var(--space-md);">Norbert E. Boros</h2>
           <p class="founder-alias">Also known as "Mecanik" &middot; Founder of {COMPANY_LEGAL_NAME}</p>
           <p class="founder-bio">
-            A solutions-driven professional with extensive experience in designing and developing complex software systems, websites, and infrastructures. With expertise grounded in multiple programming languages and state-of-the-art tools, Norbert has managed end-to-end development of complex projects — from system architecture and cryptographic implementation to full-stack web platforms and security tooling.
+            A solutions-driven professional with extensive experience in designing and developing complex software systems, websites, and infrastructures. With expertise grounded in multiple programming languages and state-of-the-art tools, Norbert has managed end-to-end development of complex projects, from system architecture and cryptographic implementation to full-stack web platforms and security tooling.
           </p>
           <p class="founder-bio">
-            Over the years, he has had the privilege of working with an impressive list of clients including Rolls Royce, VUE, Nationwide, Specsavers, LinkedIn, CrowdStrike, BUPA, VMware, Alibaba, and many more — bringing deep industry knowledge to every {COMPANY_NAME} product.
+            Over the years, he has had the privilege of working with an impressive list of clients including Rolls Royce, VUE, Nationwide, Specsavers, LinkedIn, CrowdStrike, BUPA, VMware, Alibaba, and many more, bringing deep industry knowledge to every {COMPANY_NAME} product.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Mission -->
   <section class="section section--alt">
     <div class="container container--narrow text-center">
       <span class="badge">Our Mission</span>
       <h2 style="margin-top: var(--space-md);">Software without compromise</h2>
       <p style="font-size: 1.125rem; line-height: 1.8; margin-top: var(--space-lg);">
-        We believe professionals deserve tools that are engineered to the highest standard — software that runs on your infrastructure, encrypts everything at rest, provides complete audit traceability, and carries zero external runtime dependencies. That's the 1337 promise.
+        We believe professionals deserve tools that are engineered to the highest standard: software that runs on your infrastructure, encrypts everything at rest, provides complete audit traceability, and carries zero external runtime dependencies. That's the 1337 promise.
       </p>
     </div>
   </section>
 
-  <!-- Values -->
   <section class="section">
     <div class="container">
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
@@ -103,7 +99,6 @@ const timeline = [
     </div>
   </section>
 
-  <!-- Timeline -->
   <section class="section section--alt">
     <div class="container container--narrow">
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
@@ -125,7 +120,6 @@ const timeline = [
     </div>
   </section>
 
-  <!-- Tech Stack -->
   <section class="section">
     <div class="container container--narrow text-center">
       <span class="badge">Technology</span>
@@ -162,7 +156,6 @@ const timeline = [
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="section--dark cta-bottom">
     <div class="container text-center">
       <h2>Want to learn more?</h2>

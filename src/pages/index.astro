@@ -1,6 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { SITE_TITLE, SITE_DESCRIPTION, PRODUCTS, COMPANY_NAME } from "../consts";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL, PRODUCTS, COMPANY_NAME } from "../consts";
+
+const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_TITLE,
+  url: SITE_URL,
+  description: SITE_DESCRIPTION,
+};
 
 const pillars = [
   {
@@ -11,27 +19,27 @@ const pillars = [
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
     title: "Cross-Platform Native",
-    description: "Built with C++17 and Qt 6, our products run natively on Windows, macOS, and Linux — no emulation, no compromise.",
+    description: "Built with C++17 and Qt 6, our products run natively on Windows, macOS, and Linux. No emulation, no compromise.",
   },
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
     title: "Local-First Architecture",
-    description: "Your data stays on your infrastructure. No cloud lock-in, no telemetry, no data leaving your network — fully air-gappable.",
+    description: "Your data stays on your infrastructure. No cloud lock-in, no telemetry, no data leaving your network. Fully air-gappable.",
   },
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93"/><path d="M12 8v13"/><path d="m8 22 4-4 4 4"/><path d="M4 12c0-1.1.9-2 2-2h1"/><path d="M17 10h1a2 2 0 0 1 0 4h-1"/><path d="M4 16h1a2 2 0 0 1 0 4H4"/><path d="M20 16h-1"/></svg>`,
     title: "AI-Augmented",
-    description: "Dual-engine AI — local heuristic analysis for offline use, plus optional remote LLM integration for deeper insights.",
+    description: "Dual-engine AI with local heuristic analysis for offline use, plus optional remote LLM integration for deeper insights.",
   },
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
     title: "Zero Dependencies",
-    description: "No third-party runtime libraries. Cryptography, protocol handling, and AI heuristics are all native — eliminating supply chain risk.",
+    description: "No third-party runtime libraries. Cryptography, protocol handling, and AI heuristics are all native, eliminating supply chain risk.",
   },
   {
     icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
     title: "Enterprise-Ready",
-    description: "From single-user standalone to multi-user TLS-encrypted server deployments with RBAC and 2FA — scale at your own pace.",
+    description: "From single-user standalone to multi-user TLS-encrypted server deployments with RBAC and 2FA. Scale at your own pace.",
   },
 ];
 
@@ -43,9 +51,8 @@ const stats = [
 ];
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION} schema={homeSchema}>
 
-  <!-- ===== Hero ===== -->
   <section class="hero section--dark">
     <div class="container text-center">
       <div class="hero__content animate-fade-in-up">
@@ -54,7 +61,7 @@ const stats = [
           Software Engineered<br />to Be <span class="hero__highlight">1337.</span>
         </h1>
         <p class="hero__subtitle">
-          We build enterprise-grade tools for professionals who refuse to compromise. Security, compliance, encryption — crafted with two decades of engineering expertise and zero external dependencies.
+          We build enterprise-grade tools for professionals who refuse to compromise. Security, compliance, and encryption, crafted with two decades of engineering expertise and zero external dependencies.
         </p>
         <div class="hero__actions">
           <a href="/products" class="btn btn--white btn--lg">Explore Products</a>
@@ -64,7 +71,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- ===== Stats Bar ===== -->
   <section class="stats-bar">
     <div class="container">
       <div class="stats-bar__grid">
@@ -78,14 +84,13 @@ const stats = [
     </div>
   </section>
 
-  <!-- ===== Why 1337 ===== -->
   <section class="section" id="why-1337">
     <div class="container">
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
         <span class="badge">Why 1337</span>
         <h2 style="margin-top: var(--space-md);">Engineering principles, not shortcuts</h2>
         <p style="max-width: 640px; margin: var(--space-md) auto 0;">
-          Every 1337 product is built on the same uncompromising foundation — hand-coded cryptography, native performance, and complete data sovereignty.
+          Every 1337 product is built on the same uncompromising foundation: hand-coded cryptography, native performance, and complete data sovereignty.
         </p>
       </div>
       <div class="grid grid--3">
@@ -102,7 +107,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- ===== Products ===== -->
   <section class="section section--alt" id="products">
     <div class="container">
       <div class="text-center" style="margin-bottom: var(--space-3xl);">
@@ -167,7 +171,6 @@ const stats = [
     </div>
   </section>
 
-  <!-- ===== CTA ===== -->
   <section class="section--dark cta-section">
     <div class="container text-center">
       <h2>Ready to experience 1337?</h2>

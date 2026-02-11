@@ -8,15 +8,16 @@ interface Props {
   description: string;
   image?: string;
   noIndex?: boolean;
+  schema?: Record<string, any> | Record<string, any>[];
 }
 
-const { title, description, image, noIndex = false } = Astro.props;
+const { title, description, image, noIndex = false, schema } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={image} noIndex={noIndex} />
+    <BaseHead title={title} description={description} image={image} noIndex={noIndex} schema={schema} />
   </head>
   <body>
     <Header />

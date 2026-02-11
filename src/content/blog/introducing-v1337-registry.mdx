@@ -1,0 +1,47 @@
+---
+title: "Introducing V1337 Registry"
+description: "A local-first, AES-256 encrypted compliance evidence registry built from scratch in C++17 with zero external dependencies."
+pubDate: 2025-01-15
+author: "Norbert E. Boros"
+tags: ["product", "compliance", "encryption", "C++"]
+---
+
+After years of building enterprise software for global clients, one thing became clear: compliance teams deserve better tools. Most compliance software today forces you into cloud-only platforms, locks your data behind vendor-controlled infrastructure, and demands you trust a third party with your most sensitive evidence.
+
+V1337 Registry takes a fundamentally different approach.
+
+## Built from the ground up
+
+V1337 Registry is written entirely in C++17 using Qt 6 as the UI framework. Every component, from the AES-256-CBC encryption engine to the email parser and the AI heuristic analyser, is hand-coded. There are no external runtime dependencies. No OpenSSL. No Electron. No embedded browser engines.
+
+This wasn't done for the sake of complexity. It was done to eliminate supply chain risk entirely. When your compliance evidence sits behind encryption, you need to know exactly what code is handling that encryption.
+
+## What it does
+
+At its core, V1337 Registry is an encrypted compliance evidence registry designed for UK tax regulations and international regulatory frameworks. It provides:
+
+- **Encrypted document vaults** with AES-256-CBC and PBKDF2-SHA256 key derivation
+- **Immutable audit trails** that log every action taken on every document
+- **Compliance risk scoring** with AI-powered analysis and detailed breakdowns
+- **Retention policy management** with 7 built-in jurisdiction templates
+- **Full-text search** via SQLite FTS5 across all vault contents
+- **Email evidence capture** with native IMAP support (no external libraries)
+- **Encrypted export packages** for audit preparation and evidence sharing
+
+Everything runs locally on your machine. No data leaves your network unless you explicitly choose to use the optional remote LLM integration for deeper AI analysis.
+
+## Two editions
+
+**Business Edition** is the full standalone product. It includes everything listed above and is designed for individual teams and single-user deployments.
+
+**Enterprise Edition** adds multi-user server mode with TLS-encrypted communication, mutual TLS (mTLS), role-based access control, TOTP two-factor authentication, real-time document collaboration, locking and sync, and server push notifications. The server component (V1337 Registry Server) is a separate application that manages centralised vault access for teams.
+
+## Cross-platform by design
+
+V1337 Registry runs natively on Windows (x64), macOS (Intel and Apple Silicon), and Linux (x64). It's a true native application compiled for each platform, not a web app wrapped in a container.
+
+## What's next
+
+We'll be sharing more technical deep-dives on the engineering decisions behind V1337 Registry, including how we implemented AES-256 without OpenSSL, our approach to immutable audit logging, and how the dual-engine AI system works.
+
+If you're interested in evaluating V1337 Registry for your organisation, [get in touch](/contact) or [view pricing](/pricing).

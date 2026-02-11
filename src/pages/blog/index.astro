@@ -1,0 +1,158 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Blog"
+  description="Engineering insights, product updates, and compliance industry perspectives from the Area 1337 team."
+>
+
+  <section class="blog-hero section--dark">
+    <div class="container text-center">
+      <div class="animate-fade-in-up">
+        <span class="badge badge--dark">Blog</span>
+        <h1 style="margin-top: var(--space-md);">Engineering & Product Insights</h1>
+        <p class="blog-hero__subtitle">
+          Updates, technical deep-dives, and perspectives from the team behind Area 1337.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      {posts.length === 0 ? (
+        <p class="text-center" style="color: var(--color-text-muted); padding: var(--space-4xl) 0;">
+          No posts yet. Check back soon.
+        </p>
+      ) : (
+        <div class="blog-list">
+          {posts.map((post) => (
+            <article class="blog-card">
+              <a href={`/blog/${post.id}`} class="blog-card__link">
+                <div class="blog-card__content">
+                  <time class="blog-card__date" datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  <h2 class="blog-card__title">{post.data.title}</h2>
+                  <p class="blog-card__desc">{post.data.description}</p>
+                  {post.data.tags.length > 0 && (
+                    <div class="blog-card__tags">
+                      {post.data.tags.map((tag: string) => (
+                        <span class="blog-card__tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <span class="blog-card__arrow">&rarr;</span>
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .blog-hero {
+    padding: var(--space-4xl) 0 var(--space-2xl);
+  }
+
+  .blog-hero__subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-md);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .blog-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .blog-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .blog-card__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-xl);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .blog-card__date {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .blog-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .blog-card__desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .blog-card__tag {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .blog-card__arrow {
+    font-size: 1.25rem;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-left: var(--space-lg);
+  }
+
+  @media (max-width: 600px) {
+    .blog-card__link {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .blog-card__arrow {
+      margin-left: 0;
+      margin-top: var(--space-sm);
+    }
+  }
+</style>

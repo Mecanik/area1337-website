@@ -3,7 +3,7 @@
 
 export const SITE_TITLE = "Area 1337";
 export const SITE_DESCRIPTION =
-  "Elite software for professionals who demand the best. Area 1337 builds enterprise-grade tools — security, compliance, encryption, and beyond — engineered to the highest standard.";
+  "Elite software for professionals who demand the best. Area 1337 builds enterprise-grade tools for security, compliance, encryption, and beyond.";
 export const SITE_URL = "https://area1337.com";
 export const COMPANY_NAME = "Area 1337";
 export const COMPANY_LEGAL_NAME = "Mecanik Dev Ltd";
@@ -13,6 +13,7 @@ export const COMPANY_SUPPORT_EMAIL = "support@area1337.com";
 export const NAV_LINKS = [
   { label: "Products", href: "/products" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -42,7 +43,7 @@ export const PRODUCTS: readonly Product[] = [
     name: "V1337 Registry",
     tagline: "Encrypted Compliance Evidence Registry",
     description:
-      "Local-first encrypted compliance evidence registry for UK tax & international regulatory compliance. Manage document vaults, audit trails, risk scoring, and evidence exports — all with zero external dependencies.",
+      "Local-first encrypted compliance evidence registry for UK tax & international regulatory compliance. Manage document vaults, audit trails, risk scoring, and evidence exports with zero external dependencies.",
     platforms: ["Windows", "macOS", "Linux"],
     status: "available",
     href: "/products",
